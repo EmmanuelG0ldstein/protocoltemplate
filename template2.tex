@@ -1,0 +1,133 @@
+\documentclass[           %Befehl für die Dokumentendefinition
+  titlepage=firstiscover, %ändert die Standardtitelseite
+  10pt,a4paper]           %Schriftgröße und Papierformat 
+  {scrartcl}              %Art des Dokuments, ein auf die deutsche Typograph                            ie zugeschnittenes Format
+
+%ändert die Schriftart zu Latin Modern 
+\usepackage{fontspec}
+
+%Ermöglicht direkte Eingabe von Umlauten
+\usepackage[utf8]{inputenc}
+
+%Deutsche Sprachunterstützung
+\usepackage[german]{babel}
+
+%Europäische Erweiterung des Unicodes
+\usepackage[T1]{fontenc}
+
+%Mathematsiche Symbole etc.
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+%Summenformeln
+\usepackage{mhchem}
+
+%ermöglicht das simple schreiben von Strukturformeln
+\usepackage{chemfig}
+
+%Einbetten von Grafiken
+\usepackage{graphicx}
+
+%Schönere, leserliche Tabellen, nicht so ein Massaker wie im PC Handbuch
+\usepackage{booktabs}
+
+%Zahlen und Einheiten nach Norm
+\usepackage{siunitx}
+
+%links innerhalb des  Dokuments
+\usepackage[unicode]{hyperref}
+
+%Veränderung der Fußnoten
+\usepackage{bookmark}
+
+%Veränderung der Überschrift von Tabellen
+\usepackage{caption}
+
+%Verlinkung bspw von Quellen möglich
+\usepackage{url}
+
+\usepackage{tikz}
+
+
+\begin{document} %erst hiernach kann Text verfasst werden.
+\title{Versuch XX}
+\author{Name1 \and Name2 \and Gruppennummer XX}
+\publishers{geschrieben von Name2} 
+\date{%entweder von Hand bspw 1.1.1970 oder bspw per \today}
+
+\maketitle              %erzeugt Titelseite
+\thispagestyle{empty}   %Keine Nummeriung auf Titelseite
+\newpage                %Seitenumbruch, damit Inhaltsverzeichnis etc nicht auf
+                        %der titelseite erscheinen.
+\tableofcontens         %Inhaltsverzeichnis
+\listoffigure           %Abbildungsverzeichnis
+\listoftables           %Tabellenverzeichnis
+
+\newpage
+
+\section{Einleitung}
+\subsection{Theorie}
+\subsubsection{Reaktionsgleichnug}  %LaTeX bietet 3 hierachische Abstufungen,
+                                    %welche im Inhaltsverzeichnis dargestellt
+                                    %werden
+\section{Syntax}
+Der \latex Syntax ist es extrem simpel gehalten, ein Befehl beginnt immer
+mit einem " \ ", darauf folgt der Befehl, in [ ] folgen Optionen, welche
+nicht obligatorisch sind, bspw die Schriftgröße für das Dokument 
+(s. Zeile 1), dann folgt in { } das obligatorische Argument des Befehls.  
+Jedes Pakte bringt seine eigenen Befehle (für mhchem bspw \ce) und 
+eventuell seinen eigenen Syntax für das Argument mit sich, dafür gibt es 
+die Paketdokumentation, dort sind auch Optionen etc aufgeführt. 
+Vollständig sieht es dann so aus:
+\befehl[Option1,Option2]{Argument}
+
+Innerhalb einer Umgebung können neue Umgebungen geöffnet werden (Bspw
+Schriftgröße innerhalb einer Tabelle), jedoch müssen Umgebungen immer wieder in
+der umgekehrten Reihenfolge geschlossen werden:
+\begin{table}
+    \begin{tabular}{c}
+        \begin{footnotesize}
+            Text1 
+            Text2 
+        \end{footnotesize}
+    \end{tabular}
+\end{table}
+
+Allgemein bekommen Tabellen eine ÜBERSCHRIFT (nicht wie im PC-Handbuch...),
+welche mit \caption{ } erstellt wird. 
+Mit \begin{table} erzeugt man eine sogenannte Gleitumgebung, welche von LaTeX
+seperat betrachtet wird, dies ermöglicht übersichtlichere Dokumente.
+
+Gleichungen sollten immer im mathmode geschrieben werden, dieser wird durch $ $
+begrenzt.
+So lassen sich bspw kürzere Reaktionen mit Strukturformel darstellen:
+\begin{figure}
+
+    \chemfig{*6(=-=(-[:30](-[:330](=[:270]\ce{NH})(-[:30]\ce{CH_3})))-=-)} +
+    \ce{H_2}
+    \schemestart \arrow{<=>} \schemestop
+    \chemfig{*6(=-=(-[:30](-[:330](-[:270]\ce{NH})(-[:30]\ce{CH_3})))-=-)}·
+    \ce{H_2}
+
+\end{figure}
+Aber auch kompliziertere Dinge sind darstellbar: 
+\begin{figure}
+\begin{small}
+\chemfig{C(>[:50,,,,line width=1pt]C(-N(-[:110]C(-[:75]C(-\si{O^{-}}?[d])(=[:105]O)))(<:[:60]C(-[,,,,dash pattern=on 2pt off 2pt]C(=[:20]O)(-[:-30]\si{O^{-}}?[e])))(>:[7,,,,,red]\textcolor{red}{Ca}?[x]?[d,6,red]?[e,6,red])))(-[:-30,,,,line width=4pt]N?[x,7,red](-[6]C(-[7]C(-\si{O^{-}}?[x,7,red])(=[6]O)))(>[7,,,,line width=1pt]C(-[,,,,line width=2pt]C(-[:15]\si{O^{-}}?[x,7,red])(=[:-15]O))))}
+\end{small}
+\end{figure}
+
+Das mal als kurze Einführunf in LaTeX, ich denke vorallem die Präambel mit den
+zu verwendenden Paketen sollte verhindern, dass eure Dokumente nachher aussehen
+wie das PC-Handbuch. 
+\end{document}  %hiermit wird das Dokument beendet, danach sind nur noch
+                %Kommentare möglich. Dieses Dokument lässt sich nicht
+                %kompilieren, da die Beispiele keinen Befehlen entsprechen. 
+                %Um dies zu erreichen einfach vor allen Klammern und 
+                %Befehlen im Text % ergänzen, um diese auszukommentieren, dann beachtet
+                %der Compiler diese nicht mehr.
+
+
+
+
